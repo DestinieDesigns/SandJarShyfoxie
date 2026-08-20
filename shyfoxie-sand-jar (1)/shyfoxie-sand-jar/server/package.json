@@ -1,0 +1,15 @@
+{
+  "name": "shyfoxie-tiktok-bridge",
+  "version": "1.0.0",
+  "description": "Optional Node bridge that relays real TikTok LIVE events (likes, gifts) to the Shyfoxie Sand Jar browser overlay over WebSocket.",
+  "type": "module",
+  "main": "tiktok-bridge.js",
+  "scripts": {
+    "start": "node tiktok-bridge.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "tiktok-live-connector": "^2.4.3",
+    "ws": "^8.18.0"
+  }
+}

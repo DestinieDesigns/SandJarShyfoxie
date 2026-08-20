@@ -1,0 +1,25 @@
+/* ============================================================================
+   debug.css — the ?debug=true performance/state readout.
+   ============================================================================ */
+
+.debug-panel {
+  position: fixed;
+  bottom: 12px;
+  left: 12px;
+  margin: 0;
+  padding: 10px 14px;
+  background: rgba(6, 7, 20, 0.85);
+  border: 1px solid rgba(88, 216, 232, 0.4);
+  border-radius: 10px;
+  color: #9ff6ff;
+  font-family: "Consolas", "Menlo", monospace;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  white-space: pre;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.debug-panel[data-hidden="true"] {
+  display: none;
+}

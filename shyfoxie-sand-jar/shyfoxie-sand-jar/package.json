@@ -1,0 +1,17 @@
+{
+  "name": "shyfoxie-sand-jar",
+  "version": "1.0.0",
+  "description": "Shyfoxie's LIVE Sand Jar — an interactive TikTok LIVE sand-art overlay for OBS. Likes fill the jar, gifts color the sand.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node serve.js",
+    "smoke-test": "node test/smoke.mjs && node test/smoke-live.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "^30.0.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

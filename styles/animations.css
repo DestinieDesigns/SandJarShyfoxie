@@ -1,0 +1,50 @@
+/* ============================================================================
+   animations.css — shake / glow pulse / misc keyframes.
+   Respects the config.effects.reduceFlashing toggle via the
+   body.reduce-flashing class (applied from main.js).
+   ============================================================================ */
+
+@keyframes jarShake {
+  0% { transform: translateX(0) rotate(0deg); }
+  15% { transform: translateX(-6px) rotate(-1.2deg); }
+  30% { transform: translateX(5px) rotate(1deg); }
+  45% { transform: translateX(-5px) rotate(-1deg); }
+  60% { transform: translateX(4px) rotate(0.8deg); }
+  75% { transform: translateX(-3px) rotate(-0.5deg); }
+  100% { transform: translateX(0) rotate(0deg); }
+}
+
+.jar--shake {
+  animation: jarShake 0.5s ease-in-out;
+}
+
+body.reduce-flashing .jar--shake {
+  animation: none; /* accessibility: skip the shake entirely */
+}
+
+@keyframes glowPulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.15); }
+}
+
+#jarGlowRing.active {
+  animation: glowPulse 1.4s ease-in-out infinite;
+}
+
+body.reduce-flashing #jarGlowRing.active {
+  animation: none;
+}
+
+/* Gentle idle float on the whole stage so it doesn't feel static. */
+@keyframes idleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.jar-wrap {
+  animation: idleFloat 6s ease-in-out infinite;
+}
+
+body.reduce-flashing .jar-wrap {
+  animation: none;
+}

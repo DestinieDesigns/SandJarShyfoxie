@@ -1,0 +1,165 @@
+/* ============================================================================
+   jar.css — the large glass jar. Built from a neck + body so it reads as
+   an actual container rather than a flat rectangle, with layered gradients
+   standing in for glass transparency, reflection, and refraction.
+   ============================================================================ */
+
+.jar-wrap {
+  position: relative;
+  /* Actual pixel size is set inline via CSS custom properties from
+     config.jar (width/height), so this file only defines proportions. */
+  width: var(--jar-w, 460px);
+  height: calc(var(--jar-h, 660px) + 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.45));
+}
+
+.jar {
+  position: relative;
+  width: var(--jar-w, 460px);
+  height: var(--jar-h, 660px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* -- Neck --------------------------------------------------------------- */
+
+.jar__neck {
+  width: calc(var(--jar-w, 460px) * var(--neck-w-ratio, 0.62));
+  height: calc(var(--jar-h, 660px) * var(--neck-h-ratio, 0.12));
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.22) 18%,
+    rgba(255, 255, 255, 0.05) 35%,
+    rgba(255, 255, 255, 0.02) 70%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-bottom: none;
+  border-radius: 14px 14px 0 0;
+  backdrop-filter: blur(1px);
+  position: relative;
+  z-index: 2;
+}
+
+.jar__rim {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(var(--jar-w, 460px) * var(--neck-w-ratio, 0.62) + 14px);
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* -- Body ----------------------------------------------------------------- */
+
+.jar__body {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  margin-top: -2px;
+  border-radius: 28px 28px 46px 46px;
+  overflow: hidden; /* clips the sand canvas to the jar's rounded shape */
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 12%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  box-shadow:
+    inset 0 0 40px rgba(255, 255, 255, 0.05),
+    inset 0 -20px 60px rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.jar__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: auto;
+}
+
+/* A soft diagonal streak suggesting a curved-glass highlight. */
+.jar__glass-highlight {
+  position: absolute;
+  top: 0;
+  left: 8%;
+  width: 18%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+  filter: blur(6px);
+  transform: skewX(-8deg);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+/* Vignette-style shading toward the edges for a rounded/refractive feel. */
+.jar__glass-shade {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 30%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(6, 7, 20, 0.22) 100%
+  );
+  pointer-events: none;
+}
+
+/* -- Celebration glow ring -------------------------------------------------- */
+
+.jar__glow-ring {
+  position: absolute;
+  inset: -14px;
+  border-radius: 40px;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 0 0 rgba(255, 212, 71, 0);
+  transition: opacity 0.6s ease, box-shadow 0.6s ease;
+}
+
+.jar.jar--glow ~ .jar__glow-ring,
+.jar--glow + .jar__banner + .jar__glow-ring {
+  /* handled via JS class toggle on #jarGlowRing instead — see main.js */
+}
+
+#jarGlowRing.active {
+  opacity: 1;
+  box-shadow: 0 0 70px 18px rgba(255, 212, 71, 0.55);
+}
+
+/* -- Celebration banner ----------------------------------------------------- */
+
+.jar__banner {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, 10px);
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  white-space: pre-line;
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(255, 212, 71, 0.6), 0 4px 12px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 5;
+}
+
+.jar__banner.banner--visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

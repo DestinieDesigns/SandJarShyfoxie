@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shyfoxie's LIVE Sand Jar</title>
+
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/jar.css" />
+  <link rel="stylesheet" href="styles/animations.css" />
+  <link rel="stylesheet" href="styles/debug.css" />
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- ============ MAIN VISUAL ============ -->
+    <div id="stage">
+
+      <div class="ui-top">
+        <div class="brand-title" data-el="title">✨ SHYFOXIE'S LIVE SAND ✨</div>
+      </div>
+
+      <div class="jar-wrap">
+        <div class="jar" id="jar">
+          <div class="jar__neck"></div>
+          <div class="jar__body">
+            <canvas id="sandCanvas" class="jar__canvas"></canvas>
+            <div class="jar__glass-highlight"></div>
+            <div class="jar__glass-shade"></div>
+          </div>
+          <div class="jar__rim"></div>
+        </div>
+        <div class="jar__banner" id="jarBanner"></div>
+        <div class="jar__glow-ring" id="jarGlowRing"></div>
+      </div>
+
+      <div class="ui-bottom">
+        <div class="stat stat--likes" data-el="likes">
+          <span class="stat__icon">❤️</span>
+          <span class="stat__value" id="likeCount">0</span>
+          <span class="stat__label">LIKES</span>
+        </div>
+        <div class="stat stat--jarnum" data-el="jarnum">
+          JAR #<span id="jarNumber">1</span>
+        </div>
+        <div class="stat stat--percent" data-el="percent">
+          <span id="percentValue">0</span>% FULL
+        </div>
+      </div>
+
+      <div class="gift-alert" id="giftAlert"></div>
+
+    </div>
+
+    <!-- ============ DEBUG PANEL (shown only with ?debug=true) ============ -->
+    <pre id="debugPanel" class="debug-panel"></pre>
+
+    <!-- ============ TEST CONTROLS (shown only in ?mode=test, the default) ============ -->
+    <div id="testPanel" class="test-panel">
+      <div class="test-panel__header">TEST CONTROLS</div>
+
+      <div class="test-panel__group">
+        <div class="test-panel__label">Likes</div>
+        <button data-testaction="like:10">+10 Likes</button>
+        <button data-testaction="like:100">+100 Likes</button>
+        <button data-testaction="like:1000">+1,000 Likes</button>
+      </div>
+
+      <div class="test-panel__group">
+        <div class="test-panel__label">Gifts</div>
+        <button data-testaction="gift:Rose">🌹 Rose</button>
+        <button data-testaction="gift:Heart">❤️ Heart</button>
+        <button data-testaction="gift:Blue Heart">💙 Blue Heart</button>
+        <button data-testaction="gift:Flower">🌸 Flower</button>
+        <button data-testaction="gift:Lion">🦁 Lion</button>
+        <button data-testaction="gift:Rainbow">🌈 Rainbow</button>
+      </div>
+
+      <div class="test-panel__group">
+        <div class="test-panel__label">Jar</div>
+        <button data-testaction="fill-jar">Fill Jar</button>
+        <button data-testaction="empty-jar">Empty Jar</button>
+        <button data-testaction="trigger-celebration">Trigger Celebration</button>
+        <button data-testaction="reset-jar">Reset Jar</button>
+      </div>
+
+      <div class="test-panel__group">
+        <div class="test-panel__label">Simulation</div>
+        <button data-testaction="pause-sim">Pause Simulation</button>
+        <button data-testaction="resume-sim">Resume Simulation</button>
+      </div>
+
+      <div class="test-panel__group">
+        <div class="test-panel__label">Ambient demo traffic</div>
+        <button id="ambientToggle">Start ambient traffic</button>
+      </div>
+
+      <div class="test-panel__hint">
+        Add <code>?mode=live</code> to the URL to hide this panel for OBS.<br />
+        Add <code>&amp;debug=true</code> to show performance stats.
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

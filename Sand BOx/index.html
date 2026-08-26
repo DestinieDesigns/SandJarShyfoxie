@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101c2b">
+  <title>Shyfoxie Dream Pixel Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="studio" id="studio">
+    <header class="brand hud-item">
+      <span class="brand-mark" aria-hidden="true">✦</span>
+      <div>
+        <h1>Shyfoxie Dream Pixel Studio</h1>
+        <p>one tiny diamond <span>•</span> one quiet moment <span>•</span> one finished picture</p>
+      </div>
+    </header>
+
+    <nav class="toolbar hud-item" aria-label="Studio controls">
+      <button class="control-button mode-button active" id="diamondModeButton" type="button"><span>◇</span> Diamond Painting</button>
+      <button class="control-button mode-button" id="sandModeButton" type="button"><span>≈</span> Falling Sand</button>
+      <button class="control-button" id="newArtButton" type="button"><span>✧</span> New Art</button>
+      <button class="control-button" id="pauseButton" type="button"><span>Ⅱ</span> Pause</button>
+      <button class="control-button" id="overnightButton" type="button"><span>☾</span> Overnight</button>
+      <label class="select-control">Speed
+        <select id="speedSelect" aria-label="Diamond placement speed">
+          <option value="0.25">0.25x</option><option value="0.5">0.5x</option><option value="0.75">0.75x</option><option value="1" selected>1x</option><option value="1.5">1.5x</option><option value="2">2x</option><option value="3">3x</option><option value="5">5x</option><option value="10">10x</option>
+        </select>
+      </label>
+      <label class="select-control">Reveal
+        <select id="revealSelect" aria-label="Reveal order">
+          <option value="random" selected>Random</option>
+          <option value="flow">Color Flow</option>
+        </select>
+      </label>
+      <button class="control-button" id="adminPreviewButton" type="button"><span>⌘</span> Admin Preview</button>
+      <button class="icon-button" id="fullscreenButton" type="button" title="Toggle fullscreen" aria-label="Toggle fullscreen">⛶</button>
+    </nav>
+
+    <section class="painting-stage" aria-label="Pixel painting">
+      <div class="tray-shadow"></div>
+      <div class="painting-tray" id="paintingTray">
+        <canvas id="artCanvas" width="1920" height="1080" aria-label="Slowly forming pixel artwork"></canvas>
+        <div class="canvas-sheen" aria-hidden="true"></div>
+      </div>
+      <div class="placement-whisper" id="placementWhisper" aria-live="polite">a quiet diamond finds its place</div>
+    </section>
+
+    <aside class="info-panel hud-item" id="infoPanel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Now painting</p>
+          <h2 id="artName">Moonlit Fox</h2>
+        </div>
+        <span class="status-dot" id="statusDot" title="Painting is active"></span>
+      </div>
+      <p class="art-description" id="artDescription"></p>
+      <div class="current-diamond">
+        <span class="diamond-swatch" id="currentSwatch"></span>
+        <div><span class="eyebrow" id="currentDiamondLabel">Current diamond</span><strong id="currentNumber">#1</strong><strong id="currentColor">Preparing the palette</strong></div>
+      </div>
+      <div class="palette-block">
+        <span class="eyebrow">Color key</span>
+        <div class="color-key" id="palette" aria-label="Artwork color key"></div>
+      </div>
+      <div class="progress-line"><span>Progress</span><strong id="progressText">0%</strong></div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <p class="finished-message" id="finishedMessage">✦ Sunrise Complete ✦</p>
+    </aside>
+
+    <section class="settings-drawer hud-item" id="settingsDrawer" aria-label="Studio settings">
+      <label class="custom-speed">Custom <output id="customSpeedValue">1.0x</output><input id="customSpeed" type="range" min="0.1" max="15" step="0.1" value="1" aria-label="Custom speed"></label>
+      <label class="toggle-row"><input type="checkbox" id="hideHudToggle"><span class="toggle"></span><span>Hide HUD</span></label>
+      <label class="toggle-row"><input type="checkbox" id="soundToggle"><span class="toggle"></span><span>Sound Off</span></label>
+      <label class="toggle-row"><input type="checkbox" id="streamModeToggle"><span class="toggle"></span><span>Stream Mode</span></label>
+      <label class="resolution-control">Canvas
+        <select id="resolutionSelect" aria-label="Canvas resolution">
+          <option value="responsive" selected>Responsive</option>
+          <option value="1920x1080">1920 × 1080</option>
+          <option value="1280x720">1280 × 720</option>
+        </select>
+      </label>
+    </section>
+
+    <footer class="studio-footer hud-item"><span id="artCounter">01 / 20</span><span>dream studio · quietly making things</span></footer>
+
+    <section class="admin-panel" id="adminPanel" aria-label="Admin dashboard" hidden>
+      <div class="admin-header"><div><span class="eyebrow">Streamer workspace</span><h2>Admin Preview</h2></div><button class="icon-button" id="closeAdminButton" type="button" title="Return to stream" aria-label="Return to stream">×</button></div>
+      <div class="admin-dashboard">
+        <div><span class="eyebrow">Current artwork</span><strong id="adminArtworkName">Beach Sunrise</strong></div>
+        <div><span class="eyebrow">Description</span><p id="adminArtworkDescription"></p></div>
+        <div><span class="eyebrow">Status</span><strong id="adminStatus">Preparing...</strong></div>
+        <div><span class="eyebrow">Next mode</span><strong id="adminNextMode">Falling Sand</strong></div>
+        <div class="admin-stats"><div><span class="eyebrow">Progress</span><strong id="adminProgress">0%</strong></div><div><span class="eyebrow">Current diamond</span><strong id="adminCurrentDiamond">#1 · Deep Night</strong></div><div><span class="eyebrow">Remaining</span><strong id="adminRemaining">1,728</strong></div><div><span class="eyebrow">Completed</span><strong id="adminCompleted">0</strong></div><div><span class="eyebrow">Total</span><strong id="adminTotal">1,728</strong></div><div><span class="eyebrow">Finished display</span><strong id="adminFinishedDisplay">60 seconds</strong></div></div>
+      </div>
+      <div class="admin-preview-area"><canvas id="adminCanvas" width="960" height="540" aria-label="Admin artwork preview"></canvas><span id="adminPreviewLabel">Finished artwork preview</span></div>
+      <div class="admin-actions"><button class="control-button" id="templatePreviewButton" type="button">Animal Template</button><button class="control-button" id="environmentPreviewButton" type="button">Animal + Environment</button><button class="control-button" id="finishedPreviewButton" type="button">Finished Preview</button><button class="control-button" id="patternPreviewButton" type="button">Numbered Pattern</button><button class="control-button" id="returnStreamButton" type="button">Return to Stream</button><button class="control-button" id="adminNextButton" type="button">Next Artwork</button><button class="control-button" id="shuffleArtworkButton" type="button">Shuffle Artwork</button><button class="control-button" id="restartArtworkButton" type="button">Restart Artwork</button><button class="control-button" id="finishNowButton" type="button">Finish Now</button><button class="control-button" id="switchModeButton" type="button">Switch Mode</button><button class="control-button" id="adminPauseButton" type="button">Pause</button></div>
+      <div class="library-heading"><span class="eyebrow">Artwork library</span><span id="libraryHint">Select a thumbnail to preview</span></div>
+      <div class="artwork-library" id="artworkLibrary"></div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
